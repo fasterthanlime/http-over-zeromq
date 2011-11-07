@@ -1,14 +1,13 @@
 (function() {
-  var PORT, http, socket, zmq;
+  var http, socket, zmq;
   http = require('http');
   zmq = require('zeromq');
-  PORT = 23479;
   socket = zmq.createSocket('rep');
-  socket.bindSync('tcp://*:' + PORT);
+  socket.bindSync('tcp://*:23479');
   socket.on('message', function(data) {
     var options, req;
-    console.log('Request: ', data.toString('utf8'));
     options = JSON.parse(data.toString('utf8'));
+    console.log('Request: ', options);
     req = http.request(options, function(result) {
       var body;
       body = "";
@@ -17,9 +16,10 @@
       });
       return result.on('end', function(chunk) {
         return socket.send(JSON.stringify({
-          status: result.statusCode,
+          statusCode: result.statusCode,
           headers: result.headers,
-          body: body
+          body: body,
+          userData: options.userData
         }));
       });
     });

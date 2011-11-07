@@ -11,6 +11,14 @@
     host: 'humanstxt.org',
     port: 80,
     path: '/humans.txt',
-    method: 'GET'
+    method: 'GET',
+    userData: 'request1'
+  }));
+  socket.send(JSON.stringify({
+    host: 'google.com',
+    port: 80,
+    path: '/humans.txt',
+    method: 'GET',
+    userData: 'request2'
   }));
 }).call(this);

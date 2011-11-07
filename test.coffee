@@ -12,4 +12,13 @@ socket.send JSON.stringify {
   port: 80
   path: '/humans.txt'
   method: 'GET'
+  userData: 'request1'
+}
+
+socket.send JSON.stringify {
+  host: 'google.com'
+  port: 80
+  path: '/humans.txt'
+  method: 'GET'
+  userData: 'request2'
 }
