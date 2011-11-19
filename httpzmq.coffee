@@ -1,8 +1,9 @@
 http = require('http');
-zmq = require('zeromq')
+zmq = require('zmq')
 
 socket = zmq.createSocket('rep')
-socket.bindSync('tcp://*:23479')
+PORT = 23479
+socket.bindSync('tcp://*:' + PORT)
 socket.on 'message', (data) ->
   options = JSON.parse data.toString('utf8')
   console.log 'Request: ', options
@@ -18,3 +19,4 @@ socket.on 'message', (data) ->
         userData: options.userData
       }
   req.end()
+console.log 'Listening on port ' + PORT
