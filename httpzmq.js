@@ -14,7 +14,7 @@
   socket.on('message', function(data) {
     var options, req;
     options = JSON.parse(data.toString('utf8'));
-    if (options.method === 'POST' || options.method === 'PUT') {
+    if (options.method === 'POST' || options.method === 'PUT' || options.method === 'DELETE') {
       options.headers['Content-Length'] = 0;
     }
     console.log('Request: ', options);
